@@ -30,12 +30,12 @@ public class UserPaymentInfo implements Serializable {
     @Column(name = "cart_expiration_year")
     private Long cartExpirationYear;
 
-    @Column(name = "user_payment_info_id")
+    @Column(name = "card_security_code")
     private String cardSecurityCode;
 
     private BigDecimal price;
 
-    @Column(name = "user_payment_info_id")
+    @Column(name = "dt_payment")
     private LocalDate dtPayment;
 
     @OneToOne(fetch = FetchType.LAZY)

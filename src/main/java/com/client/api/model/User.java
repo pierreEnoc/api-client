@@ -19,8 +19,9 @@ import java.util.Objects;
 @Table(name = "users")
 public class User implements Serializable {
 
-    @Column(name = "users_id")
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "users_id")
     private Long id;
 
     private String name;
