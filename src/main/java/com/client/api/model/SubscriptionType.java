@@ -20,11 +20,12 @@ public class SubscriptionType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "subscriptions_type_id")
     private Long id;
 
     private String name;
 
-    @Column(name = "access_month")
+    @Column(name = "access_months")
     private Long accessMonth;
 
     private BigDecimal price;
