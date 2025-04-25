@@ -1,5 +1,6 @@
 package com.client.api.controller;
 
+import com.client.api.exception.NotFoundException;
 import com.client.api.model.SubscriptionType;
 import com.client.api.repository.SubscriptionTypeRepository;
 import com.client.api.services.SubscriptionTypeService;
@@ -28,10 +29,11 @@ public class SubscriptionTypeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SubscriptionType> findById(@PathVariable("id") Long id) {
-        SubscriptionType subscriptionType = subscriptionTypeService.fidById(id);
-        if(Objects.nonNull(subscriptionType)) {
-            return ResponseEntity.status(HttpStatus.OK).body(subscriptionType);
+        try {
+           return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.fidById(id));
+        } catch (NotFoundException n) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
     }
 }

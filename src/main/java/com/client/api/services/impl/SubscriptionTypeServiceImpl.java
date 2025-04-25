@@ -1,10 +1,12 @@
 package com.client.api.services.impl;
 
+import com.client.api.exception.NotFoundException;
 import com.client.api.model.SubscriptionType;
 import com.client.api.repository.SubscriptionTypeRepository;
 import com.client.api.services.SubscriptionTypeService;
 import org.springframework.stereotype.Service;
 
+import java.io.NotActiveException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,10 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     @Override
     public SubscriptionType fidById(Long id) {
         Optional<SubscriptionType> optionalSubscriptionType = subscriptionTypeRepository.findById(id);
-        return optionalSubscriptionType.orElse(null);
+        if (optionalSubscriptionType.isEmpty()) {
+            throw  new NotFoundException("SubscriptionType não encontrado");
+        }
+       return optionalSubscriptionType.get();
     }
 
     @Override
