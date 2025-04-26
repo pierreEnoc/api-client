@@ -11,5 +11,5 @@ public interface SubscriptionTypeService {
     SubscriptionType fidById(Long id);
     SubscriptionType create(SubscriptionTypeDto dto);
     SubscriptionType update(Long id, SubscriptionTypeDto dto);
-    void delete(Long id);
+    void deleteById(Long id);
 }
