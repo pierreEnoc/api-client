@@ -1,5 +1,6 @@
 package com.client.api.services.impl;
 
+import com.client.api.dto.SubscriptionTypeDto;
 import com.client.api.exception.NotFoundException;
 import com.client.api.model.SubscriptionType;
 import com.client.api.repository.SubscriptionTypeRepository;
@@ -34,8 +35,14 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     }
 
     @Override
-    public SubscriptionType create(SubscriptionType subscriptionType) {
-        return null;
+    public SubscriptionType create(SubscriptionTypeDto subscriptionTypeDto) {
+        return subscriptionTypeRepository.save(SubscriptionType.builder()
+                .id(subscriptionTypeDto.getId())
+                .name(subscriptionTypeDto.getName())
+                .accessMonth(subscriptionTypeDto.getAccessMonth())
+                .price(subscriptionTypeDto.getPrice())
+                .productKey(subscriptionTypeDto.getProductKey())
+                .build());
     }
 
     @Override
