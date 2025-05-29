@@ -3,6 +3,7 @@ package com.client.api.services.impl;
 import com.client.api.dto.SubscriptionTypeDto;
 import com.client.api.exception.BadRequestException;
 import com.client.api.exception.NotFoundException;
+import com.client.api.mapper.SubscriptionTypeMapper;
 import com.client.api.model.SubscriptionType;
 import com.client.api.repository.SubscriptionTypeRepository;
 import com.client.api.services.SubscriptionTypeService;
@@ -37,26 +38,15 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
         if(Objects.nonNull(subscriptionTypeDto.getId())) {
             throw  new BadRequestException("Id deve ser nulo");
         }
-        return subscriptionTypeRepository.save(SubscriptionType.builder()
-                .id(subscriptionTypeDto.getId())
-                .name(subscriptionTypeDto.getName())
-                .accessMonth(subscriptionTypeDto.getAccessMonth())
-                .price(subscriptionTypeDto.getPrice())
-                .productKey(subscriptionTypeDto.getProductKey())
-                .build());
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(subscriptionTypeDto));
     }
 
 
     @Override
     public SubscriptionType update(Long id, SubscriptionTypeDto dto) {
      getSubscriptionType(id);
-        return subscriptionTypeRepository.save(SubscriptionType.builder()
-                .id(id)
-                .name(dto.getName())
-                .accessMonth(dto.getAccessMonth())
-                .price(dto.getPrice())
-                .productKey(dto.getProductKey())
-                .build());
+     dto.setId(id);
+     return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(dto));
     }
 
 
