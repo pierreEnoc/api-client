@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -20,27 +19,33 @@ import java.util.Objects;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "users_id")
     private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String phone;
+
+    @Column(unique = true)
     private String cpf;
 
     @Column(name = "dt_subscription")
     private LocalDate dtSubscription = LocalDate.now();
 
     @Column(name = "dt_expiration")
-    private LocalDate dtExpiration;
+    private LocalDate dtExpiration = LocalDate.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_type_id")
     private UserType userType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscription_type_id")
+    @JoinColumn(name = "subscriptions_type_id")
     private SubscriptionType subscriptionType;
 
 }

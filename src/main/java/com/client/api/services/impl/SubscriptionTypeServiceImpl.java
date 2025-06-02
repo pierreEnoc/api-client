@@ -36,7 +36,7 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     @Override
     public SubscriptionType create(SubscriptionTypeDto subscriptionTypeDto) {
         if(Objects.nonNull(subscriptionTypeDto.getId())) {
-            throw  new BadRequestException("Id deve ser nulo");
+            throw  new BadRequestException("Id não deve ser information");
         }
         return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(subscriptionTypeDto));
     }
